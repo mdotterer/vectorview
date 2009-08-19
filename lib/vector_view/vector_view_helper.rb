@@ -1,5 +1,5 @@
-module RvgTemplates
-  module RvgHelper
+module VectorView
+  module VectorViewHelper
 
     include Magick
 
