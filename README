@@ -1,26 +1,53 @@
 VectorView
 ---------
 
+CONTENTS
+1. Overview
+2. Rationale
+3. History
+4. Dependencies
+5. Compatibility
+6. Installation
+7. Usage
+8. Tips and Hints
+
+
 1. Overview
 VectorView is a plugin for Ruby on Rails that provides Ruby Vector Graphics (RVG) syntax in the views.
 
-2. History
+
+2. Rationale
+ VectorView was written to keep View code in the views. It is still a view even though it is an image instead of an HTML page. Other techniques, such as creating a model that does the work of the rendering violate the basic principles of MVC and muddle your code. (Especially if you start putting that RVG code directly in the model itself!)
+
+
+3. History
 VectorView was orinally created by Michael Dotterer to produce image versions of the puzzlesin his puzzle site, http://selzzup.com
 
-3. Dependencies
+
+4. Dependencies
 RMagick (and ImageMagick) are required. Installing these can be very complicated. Refer to the abundant help on the respective home pages and Google for help in installing these.
 
-4. Compatibility
+
+5. Compatibility
 VectorView is compatible with Rails 2.3
 
 VectorView has not been tested on Rails Edge
 
 VectorView was previously running in Rails 2.2, but this code is not available on github. If you need this code, feel free to contact mdotterer on GitHub and he will provide it.
 
-5. Installation
-... Just do it? More later...
 
-6. Usage
+6. Installation
+In stalling is a simple matter putting the code in your vendor/plugins directory. You do not need to run any extra tasks to set up the plugin.
+
+git clone git://github.com/mdotterer/vectorview.git vendor/plugins/vectorview
+rm -rf vendor/plugins/vectorview.git
+
+The first step creates a clone of the git repository in the desired location.
+Since you probably don't want or need all baggage of the version history, the second command removes this.
+
+Unfortunately git does not have a way to do this in one step. (like svn export or bzr export)
+
+7. Usage
 Once installed, use the action as the following:
 
 app/controllers/foos_controller.rb
@@ -71,6 +98,10 @@ draw do |canvas|
 
 end
 
-
 The above example comes from http://www.simplesystems.org/RMagick/doc/rvgtut.html
 In my usage of RVG I found that site extremely helpful. There are more examples and references of that site. You will only need the code dealing with the actual drawing, converting the image type and creating the RVG objects is done for you automatically.
+
+
+8. Tips and Hints
+
+RVG is by no means fast. You will probably want to take advantage of Rail's page caching mechanisim to reduce the number of times you generate images using your application.
