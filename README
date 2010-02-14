@@ -31,16 +31,27 @@ RMagick (and ImageMagick) are required. Installing these can be very complicated
 5. Compatibility
 VectorView is compatible with Rails 2.3
 
-VectorView has not been tested on Rails Edge
+VectorView has not been tested on Rails 3.0 and probably does not work. This work will be upcoming shortly.
 
 VectorView was previously running in Rails 2.2, but this code is not available on github. If you need this code, feel free to contact mdotterer on GitHub and he will provide it.
 
 
 6. Installation
-In stalling is a simple matter putting the code in your vendor/plugins directory. You do not need to run any extra tasks to set up the plugin.
 
-git clone git://github.com/mdotterer/vectorview.git vendor/plugins/vectorview
-rm -rf vendor/plugins/vectorview.git
+You can install VectorView in two ways: as gem, or as a plugin. Installing as a gem is recommended because the plugin will complicate the dependencies of your application by requiring rmagick during environment load which will require RMagick to be installed before `rake gems:install` can be run.
+
+6.1 Installing as a gem (Recommended)
+ - Get the source: `git clone git://github.com/mdotterer/vectorview`
+ - Build the gem: Navigate to where you downloaded the code and run: `gem build .gemspec`
+ - Install the gem: `[sudo] gem install --local vectorview-0.0.1.gem`
+ - Add the dependency to your environment.rb file with: config.gem 'vectorview'
+ - Unpack the gem in your application: `rake gems:unpack GEM=vectorview`
+
+NOTE: VectorView is pretty general, so it will work with most any version of RMagick. You should explicitly require which version of RMagick that you need in your environment.rb before VectorView is loaded.
+
+6.2 Installing as a plugin
+ - Check out the source into your plugins directory: `git clone git://github.com/mdotterer/vectorview.git vendor/plugins/vectorview`
+ - Remove the git history: `rm -rf vendor/plugins/vectorview/.git`
 
 The first step creates a clone of the git repository in the desired location.
 Since you probably don't want or need all baggage of the version history, the second command removes this.
